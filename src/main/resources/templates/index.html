@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Facility Management</title>
+    <meta charset="ISO-8859-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <style>
+        table.table td a.edit {
+            color: #27C46B;
+        }
+
+        table.table td a.delete {
+            color: #E34724;
+        }
+
+        img {
+            width: 1630px;
+            height: 320px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Start Navbar -->
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ee9090;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand text-white fw-bolder fs-5" href="#">INSIGHT </a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle text-white fw-bolder fs-5" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            BOOK ROOM
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/new_classroom">CLASS ROOM</a></li>
+                            <li><a class="dropdown-item" href="/new_pcroom">PC ROOM</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navabr -->
+
+    <header>
+        <img th:src="@{/images/pic4.jpg}" />
+    </header>
+    <section>
+        <div align="center">
+            <br>
+            <div class="table-responsive">
+                <table class="table table-bordered text-black-50" style="background-color: #f8abab;">
+                    <thead>
+                        <tr>
+                            <th> Course Id </th>
+                            <th> Course Name </th>
+                            <th> Mode </th>
+                            <th> Category/Team </th>
+                            <th> No of Tables/PC </th>
+                            <th> Slots </th>
+                            <th> Start Date </th>
+                            <th> End Date </th>
+                            <th> Start Time </th>
+                            <th> End Time </th>
+                            <th> Operations </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${ft_users.empty}">
+                            <td colspan="12" style="text-align:center"> No Class Room Booked for Courses</td>
+                        </tr>
+                        <tr th:each="ftuser : ${ft_users}">
+                            <td><span th:text="${ftuser.courseid}"> </span></td>
+                            <td><span th:text="${ftuser.coursename}"> </span></td>
+                            <td><span th:text="${ftuser.dtype}"> </span></td>
+                            <td><span th:text="${ftuser.category}"> </span></td>
+                            <td><span th:text="${ftuser.tables}"> </span></td>
+                            <td><span th:text="${ftuser.slots}"> </span></td>
+                            <td><span th:text="${ftuser.startdate}"> </span></td>
+                            <td><span th:text="${ftuser.enddate}"> </span></td>
+                            <td><span th:text="${ftuser.starttime}"> </span></td>
+                            <td><span th:text="${ftuser.endtime}"> </span></td>
+                            <td>
+                                <a class="edit" title="Edit" data-toggle="tooltip"
+                                    th:href="@{/edit_classroom/{dtype}(dtype=${ftuser.dtype})}"><i
+                                        class="material-icons">&#xE254;</i></a>
+                                &nbsp;&nbsp;&nbsp;
+                                <a class="delete" title="Delete" data-toggle="tooltip"
+                                    th:href="@{/delete_classroom/{courseid}(courseid=${ftuser.courseid})}"><i
+                                        class="material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+
+                        <tr th:if="${pt_users.empty}">
+                            <td colspan="12" style="text-align:center"> No PC Room Booked for Courses </td>
+                        </tr>
+                        <tr th:each="ptuser : ${pt_users}">
+                            <td><span th:text="${ptuser.courseid}"> </span></td>
+                            <td><span th:text="${ptuser.coursename}"> </span></td>
+                            <td><span th:text="${ptuser.dtype}"> </span></td>
+                            <td><span th:text="${ptuser.category}"> </span></td>
+                            <td><span th:text="${ptuser.pc}"> </span></td>
+                            <td><span th:text="${ptuser.slots}"> </span></td>
+                            <td><span th:text="${ptuser.startdate}"> </span></td>
+                            <td><span th:text="${ptuser.enddate}"> </span></td>
+                            <td><span th:text="${ptuser.starttime}"> </span></td>
+                            <td><span th:text="${ptuser.endtime}"> </span></td>
+                            <td>
+                                <a class="edit" title="Edit" data-toggle="tooltip"
+                                    th:href="@{/edit_pcroom/{dtype}(dtype=${ptuser.dtype})}"><i
+                                        class="material-icons">&#xE254;</i></a>
+                                &nbsp;&nbsp;&nbsp;
+                                <a class="delete" title="Delete" data-toggle="tooltip"
+                                    th:href="@{/delete_pcroom/{courseid}(courseid=${ptuser.courseid})}"><i
+                                        class="material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div align="center">
+                    <br>
+                    <b>Number of Class Room Booked: <label th:text="${ft_users.size()}"></label></b><br>
+                    <b>Number of PC Room Booked: <label th:text="${pt_users.size()}"></label></b>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </section>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+</html>

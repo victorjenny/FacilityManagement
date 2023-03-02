@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Facility Management</title>
+    <meta charset="ISO-8859-1" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+<body>
+    <!-- Start Navbar -->
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ee9090;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand text-white fw-bolder" href="#">Insight Facility Management</a>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navabr -->
+    <div align="center">
+        <table>
+            <h1>Book New Class Room</h1>
+            <br />
+            <form action="#" th:action="@{/save_ftuser}" th:object="${room}" method="post">
+
+                <table border="0" cellpadding="10">
+                    <tr>
+                        <td> Course Id </td>
+                        <td> <input type="text" class="form-control" th:field="*{courseid}" required /></td>
+                    </tr>
+                    <tr>
+                        <td> Course Name </td>
+                        <td> <input type="text" class="form-control" th:field="*{coursename}" required /></td>
+                    </tr>
+                    <tr>
+                        <td> No of Tables </td>
+                        <td> <input type="text" class="form-control" th:field="*{tables}" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Category / Team Type</td>
+                        <td><input type="text" class="form-control" th:field="*{category}" required /></td>
+                    </tr>
+
+                    <tr>
+                        <td>Slots</td>
+                        <td><input type="text" class="form-control" th:field="*{slots}" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Start Date</td>
+                        <td><input type="date" class="form-control" th:field="*{startdate}" required /></td>
+                    </tr>
+                    <tr>
+                        <td>End Date</td>
+                        <td><input type="date" class="form-control" th:field="*{enddate}" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Start Time</td>
+                        <td><input type="time" class="form-control" th:field="*{starttime}" required /></td>
+                    </tr>
+                    <tr>
+                        <td>End Time</td>
+                        <td><input type="time" class="form-control" th:field="*{endtime}" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"> <button class="btn btn-primary col-md-12" type="submit">Save</button> </td>
+                    </tr>
+            </form>
+        </table>
+    </div>
+</body>
+
+</html>
